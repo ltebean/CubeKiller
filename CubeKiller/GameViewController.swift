@@ -58,12 +58,13 @@ class GameViewController: UIViewController {
         (1...8).forEach({ _ in
             self.spawnTarget()
         })
-
+        
+        recalutateMove()
     }
     
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         guard gestureRecognize.state == .ended else { return }
-        moveForward(distance: 5)
+        moveForward(distance: 8)
     }
     
     func moveForward(distance: Float) {
@@ -127,14 +128,24 @@ class GameViewController: UIViewController {
         bullet.runAction(action)
     }
     
+    func recalutateMove() {
+        let targetPosition = gamerNode.convertPosition(targetNode.position, to: scnView.scene!.rootNode)
+        let currentPosition = gamerNode.position
+        let by = targetPosition - currentPosition
+        let action = SCNAction.move(by: by, duration: 0.3)
+        gamerNode.removeAction(forKey: "move")
+        gamerNode.runAction(SCNAction.repeatForever(action), forKey: "move")
+    }
+    
     func handlePan(_ gesture: UIPanGestureRecognizer) {
         let tx = gesture.translation(in: gesture.view).x
         var angles = gamerNode.eulerAngles
         angles.y -= Float(CGFloat(M_PI) / 360 * tx)
         gamerNode.eulerAngles = angles
         gesture.setTranslation(CGPoint.zero, in: gesture.view)
- 
+        recalutateMove()
     }
+    
     
     func explode(node: SCNNode) {
         if node.parent == nil {
@@ -179,7 +190,7 @@ extension GameViewController: SCNSceneRendererDelegate {
         TimeInterval) {
         if time > spawnTime {
             spawnTarget()
-            spawnTime = time + 1
+            spawnTime = time + 0.5
         }
     }
     
