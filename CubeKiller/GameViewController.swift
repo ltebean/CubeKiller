@@ -88,8 +88,8 @@ class GameViewController: UIViewController {
         let target = SCNNode(geometry: SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0))
         target.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         
-        let randomX = Float(Int.random(min: -10, max: 10))
-        let randomZ = Float(Int.random(min: -10, max: 10))
+        let randomX = Float(Int.random(min: -18, max: 18))
+        let randomZ = Float(Int.random(min: -18, max: 18))
         
         target.position = position + SCNVector3(x: randomX, y: 0, z: randomZ)
         target.physicsBody?.isAffectedByGravity = false
@@ -130,13 +130,16 @@ class GameViewController: UIViewController {
     func handlePan(_ gesture: UIPanGestureRecognizer) {
         let tx = gesture.translation(in: gesture.view).x
         var angles = gamerNode.eulerAngles
-        angles.y -= Float(CGFloat(M_PI) / 300 * tx)
+        angles.y -= Float(CGFloat(M_PI) / 360 * tx)
         gamerNode.eulerAngles = angles
         gesture.setTranslation(CGPoint.zero, in: gesture.view)
  
     }
     
     func explode(node: SCNNode) {
+        if node.parent == nil {
+            return
+        }
         let geometry = node.geometry!
         let position = node.presentation.position
         let rotation = node.presentation.rotation
@@ -149,6 +152,7 @@ class GameViewController: UIViewController {
         let transformMatrix = SCNMatrix4Mult(rotationMatrix, translationMatrix)
         scene.addParticleSystem(explosion, transform: transformMatrix)
         node.removeFromParentNode()
+
 
     }
     
@@ -204,7 +208,6 @@ extension GameViewController: SCNPhysicsContactDelegate {
             }
             let action = SCNAction.sequence([wait, explode])
             target.runAction(action)
-            
         } else if node.name == "gamerBox" {
             explode(node: target)
         } else {
