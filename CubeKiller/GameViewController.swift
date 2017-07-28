@@ -55,7 +55,7 @@ class GameViewController: UIViewController {
         boxNode.physicsBody?.categoryBitMask = ColliderCategory.gamer.rawValue
         boxNode.physicsBody?.contactTestBitMask = ColliderCategory.target.rawValue
         
-        (1...15).forEach({ _ in
+        (1...8).forEach({ _ in
             self.spawnTarget()
         })
 
@@ -68,9 +68,9 @@ class GameViewController: UIViewController {
     
     func moveForward(distance: Float) {
         let duration = 0.3
-        let bounceUpAction = SCNAction.moveBy(x: 0, y: 1.0, z: 0, duration:
+        let bounceUpAction = SCNAction.moveBy(x: 0, y: 0.5, z: 0, duration:
             duration * 0.5)
-        let bounceDownAction = SCNAction.moveBy(x: 0, y: -1.0, z: 0, duration:
+        let bounceDownAction = SCNAction.moveBy(x: 0, y: -0.5, z: 0, duration:
             duration * 0.5)
         
         let targetPosition = gamerNode.convertPosition(targetNode.position, to: scnView.scene!.rootNode)
