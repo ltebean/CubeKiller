@@ -35,7 +35,7 @@ class GameViewController: UIViewController {
         // create a new scene
         scene = SCNScene(named: "art.scnassets/Game.scn")!
         scnView.scene = scene
-//        scnView.antialiasingMode = .multisampling4X
+        scnView.antialiasingMode = .multisampling4X
         scnView.delegate = self
 
         scene.physicsWorld.contactDelegate = self
@@ -55,11 +55,9 @@ class GameViewController: UIViewController {
         boxNode.physicsBody?.categoryBitMask = ColliderCategory.gamer.rawValue
         boxNode.physicsBody?.contactTestBitMask = ColliderCategory.target.rawValue
         
-        spawnTarget()
-        spawnTarget()
-        spawnTarget()
-        spawnTarget()
-        spawnTarget()
+        (1...15).forEach({ _ in
+            self.spawnTarget()
+        })
 
     }
     
@@ -101,6 +99,7 @@ class GameViewController: UIViewController {
         target.physicsBody?.collisionBitMask = ColliderCategory.gamer.rawValue | ColliderCategory.bullet.rawValue | ColliderCategory.target.rawValue
         scene.rootNode.addChildNode(target)
         
+        target.geometry?.materials[0].diffuse.contents = UIColor.random()
         target.opacity = 0
         let action = SCNAction.fadeIn(duration: 1)
         target.runAction(action)
@@ -137,15 +136,20 @@ class GameViewController: UIViewController {
  
     }
     
-    func createExplosion(geometry: SCNGeometry, position: SCNVector3,
-                         rotation: SCNVector4) {
+    func explode(node: SCNNode) {
+        let geometry = node.geometry!
+        let position = node.presentation.position
+        let rotation = node.presentation.rotation
         let explosion = SCNParticleSystem(named: "art.scnassets/Explode.scnp", inDirectory: nil)!
+        explosion.particleColor = geometry.materials[0].diffuse.contents as! UIColor
         explosion.emitterShape = geometry
         explosion.birthLocation = .surface
         let rotationMatrix = SCNMatrix4MakeRotation(rotation.w, rotation.x, rotation.y, rotation.z)
         let translationMatrix = SCNMatrix4MakeTranslation(position.x, position.y, position.z)
         let transformMatrix = SCNMatrix4Mult(rotationMatrix, translationMatrix)
         scene.addParticleSystem(explosion, transform: transformMatrix)
+        node.removeFromParentNode()
+
     }
     
     override var shouldAutorotate: Bool {
@@ -166,13 +170,12 @@ class GameViewController: UIViewController {
 }
 
 extension GameViewController: SCNSceneRendererDelegate {
-    // 2
+    
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time:
         TimeInterval) {
-        // 1
         if time > spawnTime {
             spawnTarget()
-            spawnTime = time + TimeInterval(Float.random(min: 1, max: 2))
+            spawnTime = time + 1
         }
     }
     
@@ -194,32 +197,20 @@ extension GameViewController: SCNPhysicsContactDelegate {
             target = contact.nodeB
             node = contact.nodeA
         }
-        
         if node.name == "bullet" {
             let wait = SCNAction.wait(duration: 0.3)
             let explode = SCNAction.run { node in
-                self.createExplosion(geometry: node.geometry!,
-                                     position: node.presentation.position,
-                                     rotation: node.presentation.rotation)
-                node.removeFromParentNode()
+                self.explode(node: node)
             }
             let action = SCNAction.sequence([wait, explode])
             target.runAction(action)
             
         } else if node.name == "gamerBox" {
-            createExplosion(geometry: target.geometry!,
-                            position: target.presentation.position,
-                            rotation: target.presentation.rotation)
-            target.removeFromParentNode()
+            explode(node: target)
         } else {
-            createExplosion(geometry: target.geometry!,
-                            position: target.presentation.position,
-                            rotation: target.presentation.rotation)
-            target.removeFromParentNode()
-            createExplosion(geometry: node.geometry!,
-                            position: node.presentation.position,
-                            rotation: node.presentation.rotation)
-            node.removeFromParentNode()
+            explode(node: node)
+            explode(node: target)
+
         }
 
     }

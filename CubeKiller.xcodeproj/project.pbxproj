@@ -15,6 +15,7 @@
 		FABB816C1F2A0D5D00BF3167 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FABB816A1F2A0D5D00BF3167 /* Main.storyboard */; };
 		FABB816E1F2A0D5D00BF3167 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABB816D1F2A0D5D00BF3167 /* Assets.xcassets */; };
 		FABB81711F2A0D5D00BF3167 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FABB816F1F2A0D5D00BF3167 /* LaunchScreen.storyboard */; };
+		FABB817B1F2B60FE00BF3167 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB817A1F2B60FE00BF3167 /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		FABB816D1F2A0D5D00BF3167 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FABB81701F2A0D5D00BF3167 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FABB81721F2A0D5D00BF3167 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FABB817A1F2B60FE00BF3167 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +46,7 @@
 		B34A931B1F2AE69B0010CCF4 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				FABB817A1F2B60FE00BF3167 /* UIColor.swift */,
 				B34A93191F2AD18A0010CCF4 /* SCNVector3.swift */,
 				B34A931C1F2AE6A60010CCF4 /* Number.swift */,
 			);
@@ -156,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FABB81691F2A0D5D00BF3167 /* GameViewController.swift in Sources */,
+				FABB817B1F2B60FE00BF3167 /* UIColor.swift in Sources */,
 				FABB81651F2A0D5D00BF3167 /* AppDelegate.swift in Sources */,
 				B34A931A1F2AD18A0010CCF4 /* SCNVector3.swift in Sources */,
 				B34A931D1F2AE6A60010CCF4 /* Number.swift in Sources */,
