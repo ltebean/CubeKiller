@@ -132,7 +132,7 @@ class GameViewController: UIViewController {
         let targetPosition = gamerNode.convertPosition(targetNode.position, to: scnView.scene!.rootNode)
         let currentPosition = gamerNode.position
         let by = targetPosition - currentPosition
-        let action = SCNAction.move(by: by, duration: 0.3)
+        let action = SCNAction.move(by: by, duration: 0.4)
         gamerNode.removeAction(forKey: "move")
         gamerNode.runAction(SCNAction.repeatForever(action), forKey: "move")
     }
@@ -148,7 +148,7 @@ class GameViewController: UIViewController {
     
     
     func explode(node: SCNNode) {
-        if node.parent == nil {
+        if node.parent == nil || node == nil {
             return
         }
         let geometry = node.geometry!
@@ -190,7 +190,7 @@ extension GameViewController: SCNSceneRendererDelegate {
         TimeInterval) {
         if time > spawnTime {
             spawnTarget()
-            spawnTime = time + 0.5
+            spawnTime = time + 0.6
         }
     }
     
