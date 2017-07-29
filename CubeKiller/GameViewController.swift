@@ -19,6 +19,24 @@ class GameViewController: UIViewController {
     }
 
     @IBOutlet weak var scnView: SCNView!
+    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
+    
+    var score = 0 {
+        didSet {
+            DispatchQueue.main.async {
+                self.scoreLabel.text = "SCORE: \(self.score)"
+            }
+        }
+    }
+    
+    var targetsCount = 0 {
+        didSet {
+            DispatchQueue.main.async {
+                self.countLabel.text = "CUBES: \(self.targetsCount)"
+            }
+        }
+    }
     
     var spawnTime: TimeInterval = 0
     var gamerNode: SCNNode!
@@ -30,6 +48,8 @@ class GameViewController: UIViewController {
     var scene: SCNScene!
     
     var needsShootBullet = false
+    
+    var isPlaying = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,11 +76,15 @@ class GameViewController: UIViewController {
         boxNode = scene.rootNode.childNode(withName: "gamerBox", recursively: true)
         boxNode.physicsBody?.categoryBitMask = ColliderCategory.gamer.rawValue
         boxNode.physicsBody?.contactTestBitMask = ColliderCategory.target.rawValue
-        
+
+        targetsCount = 0
+        score = 0
+
         (1...8).forEach({ _ in
             self.spawnTarget()
         })
         recalutateMove()
+        
     }
     
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
@@ -107,6 +131,7 @@ class GameViewController: UIViewController {
         let action = SCNAction.fadeIn(duration: 1)
         target.runAction(action)
         
+        targetsCount += 1
     }
     
     
@@ -167,6 +192,7 @@ class GameViewController: UIViewController {
         let transformMatrix = SCNMatrix4Mult(rotationMatrix, translationMatrix)
         scene.addParticleSystem(explosion, transform: transformMatrix)
         node.removeFromParentNode()
+        targetsCount -= 1
     }
     
     override var shouldAutorotate: Bool {
@@ -191,6 +217,7 @@ extension GameViewController: SCNSceneRendererDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time:
         TimeInterval) {
+        guard isPlaying else { return }
         if time > spawnTime {
             spawnTarget()
             spawnTime = time + 0.5
@@ -219,15 +246,20 @@ extension GameViewController: SCNPhysicsContactDelegate {
         if node.name == "bullet" {
             target.wait(forDuation: 0.5, thenRun: { node in
                 self.explode(node: node)
+                self.score += 10
             })
         } else if node.name == "gamerBox" {
             explode(node: target)
+            self.score += 20
+
         } else {
             node.wait(forDuation: 0.5, thenRun: { node in
                 self.explode(node: node)
+                self.score += 30
             })
             target.wait(forDuation: 0.5, thenRun: { node in
                 self.explode(node: node)
+                self.score += 30
             })
         }
 

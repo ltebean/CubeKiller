@@ -26,8 +26,8 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </sceneKitView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVv-zT-x86">
-                                <rect key="frame" x="306" y="627" width="54" height="30"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <rect key="frame" x="299" y="624" width="61" height="33"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <state key="normal" title="SHOOT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -35,19 +35,39 @@
                                     <action selector="shootButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="9ZV-5N-1sb"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CUBES: 10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fS-Uy-Abe">
+                                <rect key="frame" x="15" y="15" width="87" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCORE: 100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cf6-X1-Zau">
+                                <rect key="frame" x="261.5" y="15" width="98.5" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4um-It-mMH" firstAttribute="leading" secondItem="R7A-h3-CZr" secondAttribute="leading" id="2N9-zE-jMh"/>
+                            <constraint firstItem="2fS-Uy-Abe" firstAttribute="top" secondItem="2Sw-P9-lzU" secondAttribute="bottom" constant="15" id="bLC-eg-7sl"/>
+                            <constraint firstItem="2fS-Uy-Abe" firstAttribute="leading" secondItem="R7A-h3-CZr" secondAttribute="leading" constant="15" id="c3p-Fy-U9o"/>
                             <constraint firstItem="Y71-aW-gbi" firstAttribute="top" secondItem="4um-It-mMH" secondAttribute="bottom" id="cnk-yj-htU"/>
                             <constraint firstItem="4um-It-mMH" firstAttribute="top" secondItem="R7A-h3-CZr" secondAttribute="top" id="g34-bt-x6f"/>
                             <constraint firstItem="Y71-aW-gbi" firstAttribute="top" secondItem="hVv-zT-x86" secondAttribute="bottom" constant="10" id="gTd-fB-vh1"/>
                             <constraint firstAttribute="trailing" secondItem="hVv-zT-x86" secondAttribute="trailing" constant="15" id="gfD-vb-SS4"/>
+                            <constraint firstAttribute="trailing" secondItem="Cf6-X1-Zau" secondAttribute="trailing" constant="15" id="kL3-ZN-WGt"/>
                             <constraint firstAttribute="trailing" secondItem="4um-It-mMH" secondAttribute="trailing" id="mHe-dh-0tU"/>
+                            <constraint firstItem="Cf6-X1-Zau" firstAttribute="top" secondItem="2Sw-P9-lzU" secondAttribute="bottom" constant="15" id="qDs-Ve-7pa"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="countLabel" destination="2fS-Uy-Abe" id="wj5-UA-6YR"/>
                         <outlet property="scnView" destination="4um-It-mMH" id="G07-dr-dRl"/>
+                        <outlet property="scoreLabel" destination="Cf6-X1-Zau" id="eub-GG-jIH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
