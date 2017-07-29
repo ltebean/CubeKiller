@@ -85,7 +85,7 @@ class GameViewController: UIViewController {
         
         fieldNode.isHidden = true
 
-        (1...8).forEach({ _ in
+        (1...10).forEach({ _ in
             self.spawnTarget()
         })
         recalutateMove()
@@ -119,8 +119,8 @@ class GameViewController: UIViewController {
         let target = SCNNode(geometry: SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0))
         target.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         
-        let randomX = Float(Int.random(min: -13, max: 13))
-        let randomZ = Float(Int.random(min: -13, max: 13))
+        let randomX = Float(Int.random(min: -20, max: 20))
+        let randomZ = Float(Int.random(min: -20, max: 20))
         let randomY = Float.random(min: 0, max: 2)
 
         target.position = position + SCNVector3(x: randomX, y: randomY, z: randomZ)
