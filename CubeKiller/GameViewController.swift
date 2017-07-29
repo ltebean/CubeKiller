@@ -48,6 +48,7 @@ class GameViewController: UIViewController {
     var scene: SCNScene!
     
     var needsShootBullet = false
+    var fieldNode: SCNNode!
     
     var isPlaying = true
 
@@ -70,6 +71,8 @@ class GameViewController: UIViewController {
         scnView.addGestureRecognizer(panGesture)
         
         gamerNode = scene.rootNode.childNode(withName: "gamer", recursively: true)
+        fieldNode = scene.rootNode.childNode(withName: "field", recursively: true)
+
         targetNode = scene.rootNode.childNode(withName: "targetBox", recursively: true)
         targetNode.isHidden = true
         cameraNode = scene.rootNode.childNode(withName: "camera", recursively: true)
@@ -79,6 +82,8 @@ class GameViewController: UIViewController {
 
         targetsCount = 0
         score = 0
+        
+        // fieldNode.isHidden = true
 
         (1...8).forEach({ _ in
             self.spawnTarget()
@@ -116,9 +121,10 @@ class GameViewController: UIViewController {
         
         let randomX = Float(Int.random(min: -13, max: 13))
         let randomZ = Float(Int.random(min: -13, max: 13))
-        
-        target.position = position + SCNVector3(x: randomX, y: 0, z: randomZ)
-        target.physicsBody?.isAffectedByGravity = false
+        let randomY = Float.random(min: 0, max: 2)
+
+        target.position = position + SCNVector3(x: randomX, y: randomY, z: randomZ)
+        target.physicsBody?.isAffectedByGravity = true
         target.name = "target"
         target.physicsBody?.categoryBitMask = ColliderCategory.target.rawValue
         target.physicsBody?.contactTestBitMask = ColliderCategory.gamer.rawValue | ColliderCategory.bullet.rawValue | ColliderCategory.target.rawValue
@@ -148,8 +154,8 @@ class GameViewController: UIViewController {
         bullet.position = currentPosition
         bullet.physicsBody?.categoryBitMask = ColliderCategory.bullet.rawValue
         bullet.physicsBody?.contactTestBitMask = ColliderCategory.target.rawValue
-        bullet.physicsBody?.isAffectedByGravity = false
         bullet.physicsBody?.velocity = by * 8
+        bullet.physicsBody?.isAffectedByGravity = false
         bullet.name = "bullet"
         scene.rootNode.addChildNode(bullet)
         
@@ -220,7 +226,7 @@ extension GameViewController: SCNSceneRendererDelegate {
         guard isPlaying else { return }
         if time > spawnTime {
             spawnTarget()
-            spawnTime = time + 0.5
+            spawnTime = time + 0.1
         }
         if needsShootBullet {
             shoot()
@@ -242,6 +248,9 @@ extension GameViewController: SCNPhysicsContactDelegate {
         } else {
             target = contact.nodeB
             node = contact.nodeA
+        }
+        if node.name == "ground" {
+            return
         }
         if node.name == "bullet" {
             target.wait(forDuation: 0.5, thenRun: { node in
