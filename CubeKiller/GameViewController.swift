@@ -83,7 +83,7 @@ class GameViewController: UIViewController {
         targetsCount = 0
         score = 0
         
-        // fieldNode.isHidden = true
+        fieldNode.isHidden = true
 
         (1...8).forEach({ _ in
             self.spawnTarget()
@@ -138,6 +138,10 @@ class GameViewController: UIViewController {
         target.runAction(action)
         
         targetsCount += 1
+    }
+    
+    @IBAction func blackHoleButtonPressed(_ sender: Any) {
+        fieldNode.isHidden = !fieldNode.isHidden
     }
     
     
@@ -226,7 +230,7 @@ extension GameViewController: SCNSceneRendererDelegate {
         guard isPlaying else { return }
         if time > spawnTime {
             spawnTarget()
-            spawnTime = time + 0.1
+            spawnTime = time + 0.3
         }
         if needsShootBullet {
             shoot()

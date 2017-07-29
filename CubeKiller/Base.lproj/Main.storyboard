@@ -51,15 +51,30 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffg-vs-R5f">
+                                <rect key="frame" x="15" y="617" width="107" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="DbN-Sz-SZk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="BLACK HOLE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="blackHoleButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="R7R-Cc-Tcy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4um-It-mMH" firstAttribute="leading" secondItem="R7A-h3-CZr" secondAttribute="leading" id="2N9-zE-jMh"/>
+                            <constraint firstItem="ffg-vs-R5f" firstAttribute="leading" secondItem="R7A-h3-CZr" secondAttribute="leading" constant="15" id="L97-t8-xnp"/>
                             <constraint firstItem="2fS-Uy-Abe" firstAttribute="top" secondItem="2Sw-P9-lzU" secondAttribute="bottom" constant="15" id="bLC-eg-7sl"/>
                             <constraint firstItem="2fS-Uy-Abe" firstAttribute="leading" secondItem="R7A-h3-CZr" secondAttribute="leading" constant="15" id="c3p-Fy-U9o"/>
                             <constraint firstItem="Y71-aW-gbi" firstAttribute="top" secondItem="4um-It-mMH" secondAttribute="bottom" id="cnk-yj-htU"/>
                             <constraint firstItem="4um-It-mMH" firstAttribute="top" secondItem="R7A-h3-CZr" secondAttribute="top" id="g34-bt-x6f"/>
                             <constraint firstItem="Y71-aW-gbi" firstAttribute="top" secondItem="hVv-zT-x86" secondAttribute="bottom" constant="10" id="gTd-fB-vh1"/>
+                            <constraint firstItem="Y71-aW-gbi" firstAttribute="top" secondItem="ffg-vs-R5f" secondAttribute="bottom" constant="10" id="gYz-Zl-FXp"/>
                             <constraint firstAttribute="trailing" secondItem="hVv-zT-x86" secondAttribute="trailing" constant="15" id="gfD-vb-SS4"/>
                             <constraint firstAttribute="trailing" secondItem="Cf6-X1-Zau" secondAttribute="trailing" constant="15" id="kL3-ZN-WGt"/>
                             <constraint firstAttribute="trailing" secondItem="4um-It-mMH" secondAttribute="trailing" id="mHe-dh-0tU"/>
