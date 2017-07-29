@@ -119,8 +119,8 @@ class GameViewController: UIViewController {
         let target = SCNNode(geometry: SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0))
         target.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         
-        let randomX = Float(Int.random(min: -20, max: 20))
-        let randomZ = Float(Int.random(min: -20, max: 20))
+        let randomX = Float(Int.random(min: -16, max: 16))
+        let randomZ = Float(Int.random(min: -16, max: 16))
         let randomY = Float.random(min: 0, max: 2)
 
         target.position = position + SCNVector3(x: randomX, y: randomY, z: randomZ)
@@ -230,7 +230,7 @@ extension GameViewController: SCNSceneRendererDelegate {
         guard isPlaying else { return }
         if time > spawnTime {
             spawnTarget()
-            spawnTime = time + 0.3
+            spawnTime = time + 0.5
         }
         if needsShootBullet {
             shoot()
