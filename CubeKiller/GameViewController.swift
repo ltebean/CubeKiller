@@ -28,6 +28,8 @@ class GameViewController: UIViewController {
     var boxNode: SCNNode!
     
     var scene: SCNScene!
+    
+    var needsShootBullet = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,16 +60,15 @@ class GameViewController: UIViewController {
         (1...8).forEach({ _ in
             self.spawnTarget()
         })
-        
         recalutateMove()
     }
     
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         guard gestureRecognize.state == .ended else { return }
-        moveForward(distance: 8)
+        jumpForward(distance: 8)
     }
     
-    func moveForward(distance: Float) {
+    func jumpForward(distance: Float) {
         let duration = 0.3
         let bounceUpAction = SCNAction.moveBy(x: 0, y: 0.5, z: 0, duration:
             duration * 0.5)
@@ -110,6 +111,10 @@ class GameViewController: UIViewController {
     
     
     @IBAction func shootButtonPressed(_ sender: Any) {
+        needsShootBullet = true
+    }
+    
+    func shoot() {
         let targetPosition = gamerNode.convertPosition(targetNode.position, to: scnView.scene!.rootNode)
         let currentPosition = gamerNode.position
         let by = targetPosition - currentPosition
@@ -150,9 +155,6 @@ class GameViewController: UIViewController {
     
     
     func explode(node: SCNNode) {
-        if node.parent == nil {
-            return
-        }
         let geometry = node.geometry!
         let position = node.presentation.position
         let rotation = node.presentation.rotation
@@ -192,6 +194,10 @@ extension GameViewController: SCNSceneRendererDelegate {
         if time > spawnTime {
             spawnTarget()
             spawnTime = time + 0.5
+        }
+        if needsShootBullet {
+            shoot()
+            needsShootBullet = false
         }
     }
     
