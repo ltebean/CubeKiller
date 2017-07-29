@@ -28,7 +28,7 @@ class GameViewController: UIViewController {
     var boxNode: SCNNode!
     
     var scene: SCNScene!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,8 +89,8 @@ class GameViewController: UIViewController {
         let target = SCNNode(geometry: SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0))
         target.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         
-        let randomX = Float(Int.random(min: -18, max: 18))
-        let randomZ = Float(Int.random(min: -18, max: 18))
+        let randomX = Float(Int.random(min: -13, max: 13))
+        let randomZ = Float(Int.random(min: -13, max: 13))
         
         target.position = position + SCNVector3(x: randomX, y: 0, z: randomZ)
         target.physicsBody?.isAffectedByGravity = false
@@ -102,6 +102,7 @@ class GameViewController: UIViewController {
         
         target.geometry?.materials[0].diffuse.contents = UIColor.random()
         target.opacity = 0
+        target.eulerAngles.y = Float.random(min: 0, max: 3.14)
         let action = SCNAction.fadeIn(duration: 1)
         target.runAction(action)
         
@@ -122,10 +123,11 @@ class GameViewController: UIViewController {
         bullet.name = "bullet"
         scene.rootNode.addChildNode(bullet)
         
-        let wait = SCNAction.wait(duration: 2)
-        let remove = SCNAction.removeFromParentNode()
-        let action  = SCNAction.sequence([wait,remove])
-        bullet.runAction(action)
+        bullet.wait(forDuation: 2, thenRun: { node in
+            node.physicsBody?.type = .static
+            node.removeAllAnimations()
+            node.removeFromParentNode()
+        })
     }
     
     func recalutateMove() {
@@ -148,7 +150,7 @@ class GameViewController: UIViewController {
     
     
     func explode(node: SCNNode) {
-        if node.parent == nil || node == nil {
+        if node.parent == nil {
             return
         }
         let geometry = node.geometry!
@@ -163,8 +165,6 @@ class GameViewController: UIViewController {
         let transformMatrix = SCNMatrix4Mult(rotationMatrix, translationMatrix)
         scene.addParticleSystem(explosion, transform: transformMatrix)
         node.removeFromParentNode()
-
-
     }
     
     override var shouldAutorotate: Bool {
@@ -182,6 +182,7 @@ class GameViewController: UIViewController {
             return .all
         }
     }
+    
 }
 
 extension GameViewController: SCNSceneRendererDelegate {
@@ -190,7 +191,7 @@ extension GameViewController: SCNSceneRendererDelegate {
         TimeInterval) {
         if time > spawnTime {
             spawnTarget()
-            spawnTime = time + 0.6
+            spawnTime = time + 0.5
         }
     }
     
@@ -200,11 +201,8 @@ extension GameViewController: SCNSceneRendererDelegate {
 extension GameViewController: SCNPhysicsContactDelegate {
 
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-
         var target: SCNNode!
         var node: SCNNode!
-
-        print(contact.nodeA, contact.nodeB)
         if contact.nodeA.name == "target" {
             target = contact.nodeA
             node = contact.nodeB
@@ -213,18 +211,18 @@ extension GameViewController: SCNPhysicsContactDelegate {
             node = contact.nodeA
         }
         if node.name == "bullet" {
-            let wait = SCNAction.wait(duration: 0.3)
-            let explode = SCNAction.run { node in
+            target.wait(forDuation: 0.5, thenRun: { node in
                 self.explode(node: node)
-            }
-            let action = SCNAction.sequence([wait, explode])
-            target.runAction(action)
+            })
         } else if node.name == "gamerBox" {
             explode(node: target)
         } else {
-            explode(node: node)
-            explode(node: target)
-
+            node.wait(forDuation: 0.5, thenRun: { node in
+                self.explode(node: node)
+            })
+            target.wait(forDuation: 0.5, thenRun: { node in
+                self.explode(node: node)
+            })
         }
 
     }
