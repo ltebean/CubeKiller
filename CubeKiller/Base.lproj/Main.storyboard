@@ -26,7 +26,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </sceneKitView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVv-zT-x86">
-                                <rect key="frame" x="299" y="624" width="61" height="33"/>
+                                <rect key="frame" x="299" y="617" width="61" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="61" id="tUk-75-VIF"/>
+                                    <constraint firstAttribute="height" constant="40" id="xzD-ZK-P65"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <state key="normal" title="SHOOT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
