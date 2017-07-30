@@ -25,6 +25,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </sceneKitView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7q-Lu-aZs">
+                                <rect key="frame" x="15" y="5.5" width="72" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="t30-Ru-5Xt"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="PAUSE" image="icon-pause">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pauseButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="RDa-cs-K3U"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVv-zT-x86">
                                 <rect key="frame" x="299" y="617" width="61" height="40"/>
                                 <constraints>
@@ -39,25 +52,19 @@
                                     <action selector="shootButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="9ZV-5N-1sb"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CUBES: 10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fS-Uy-Abe">
-                                <rect key="frame" x="15" y="15" width="87" height="21"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCORE: 100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cf6-X1-Zau">
-                                <rect key="frame" x="261.5" y="15" width="98.5" height="21"/>
+                                <rect key="frame" x="261.5" y="15" width="98.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffg-vs-R5f">
-                                <rect key="frame" x="15" y="617" width="107" height="40"/>
+                                <rect key="frame" x="15" y="617" width="128" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="DbN-Sz-SZk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <state key="normal" title="BLACK HOLE">
+                                <state key="normal" title="SUPERCHARGE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -68,9 +75,9 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4um-It-mMH" firstAttribute="leading" secondItem="R7A-h3-CZr" secondAttribute="leading" id="2N9-zE-jMh"/>
+                            <constraint firstItem="F7q-Lu-aZs" firstAttribute="centerY" secondItem="Cf6-X1-Zau" secondAttribute="centerY" id="2h0-SO-WL9"/>
+                            <constraint firstItem="F7q-Lu-aZs" firstAttribute="leading" secondItem="R7A-h3-CZr" secondAttribute="leading" constant="15" id="34q-4I-Noh"/>
                             <constraint firstItem="ffg-vs-R5f" firstAttribute="leading" secondItem="R7A-h3-CZr" secondAttribute="leading" constant="15" id="L97-t8-xnp"/>
-                            <constraint firstItem="2fS-Uy-Abe" firstAttribute="top" secondItem="2Sw-P9-lzU" secondAttribute="bottom" constant="15" id="bLC-eg-7sl"/>
-                            <constraint firstItem="2fS-Uy-Abe" firstAttribute="leading" secondItem="R7A-h3-CZr" secondAttribute="leading" constant="15" id="c3p-Fy-U9o"/>
                             <constraint firstItem="Y71-aW-gbi" firstAttribute="top" secondItem="4um-It-mMH" secondAttribute="bottom" id="cnk-yj-htU"/>
                             <constraint firstItem="4um-It-mMH" firstAttribute="top" secondItem="R7A-h3-CZr" secondAttribute="top" id="g34-bt-x6f"/>
                             <constraint firstItem="Y71-aW-gbi" firstAttribute="top" secondItem="hVv-zT-x86" secondAttribute="bottom" constant="10" id="gTd-fB-vh1"/>
@@ -84,7 +91,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="countLabel" destination="2fS-Uy-Abe" id="wj5-UA-6YR"/>
+                        <outlet property="pauseButton" destination="F7q-Lu-aZs" id="Tqr-CX-6oK"/>
                         <outlet property="scnView" destination="4um-It-mMH" id="G07-dr-dRl"/>
                         <outlet property="scoreLabel" destination="Cf6-X1-Zau" id="eub-GG-jIH"/>
                     </connections>
@@ -94,4 +101,7 @@
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon-pause" width="16" height="16"/>
+    </resources>
 </document>

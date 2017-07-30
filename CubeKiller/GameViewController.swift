@@ -19,21 +19,13 @@ class GameViewController: UIViewController {
     }
 
     @IBOutlet weak var scnView: SCNView!
-    @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var pauseButton: UIButton!
     
     var score = 0 {
         didSet {
             DispatchQueue.main.async {
                 self.scoreLabel.text = "SCORE: \(self.score)"
-            }
-        }
-    }
-    
-    var targetsCount = 0 {
-        didSet {
-            DispatchQueue.main.async {
-                self.countLabel.text = "CUBES: \(self.targetsCount)"
             }
         }
     }
@@ -80,7 +72,6 @@ class GameViewController: UIViewController {
         boxNode.physicsBody?.categoryBitMask = ColliderCategory.gamer.rawValue
         boxNode.physicsBody?.contactTestBitMask = ColliderCategory.target.rawValue
 
-        targetsCount = 0
         score = 0
         
         fieldNode.isHidden = true
@@ -90,6 +81,11 @@ class GameViewController: UIViewController {
         })
         recalutateMove()
         
+        GameHelper.shared.loadSound(name: "explode", fileNamed: "art.scnassets/Sound/Paddle.wav")
+        GameHelper.shared.loadSound(name: "jump", fileNamed: "art.scnassets/Sound/Jump.wav")
+        GameHelper.shared.loadSound(name: "shoot", fileNamed: "art.scnassets/Sound/Barrier.wav")
+        GameHelper.shared.loadSound(name: "supercharge", fileNamed: "art.scnassets/Sound/Powerup.wav")
+
     }
     
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
@@ -112,6 +108,8 @@ class GameViewController: UIViewController {
         let forwardAction = SCNAction.move(by: by * distance, duration: duration)
         gamerNode.runAction(forwardAction)
         boxNode.runAction(SCNAction.sequence([bounceUpAction, bounceDownAction]))
+        GameHelper.shared.playSound(node: gamerNode, name: "jump")
+
     }
     
     func spawnTarget() {
@@ -136,8 +134,6 @@ class GameViewController: UIViewController {
         target.eulerAngles.y = Float.random(min: 0, max: 3.14)
         let action = SCNAction.fadeIn(duration: 1)
         target.runAction(action)
-        
-        targetsCount += 1
     }
     
     @IBAction func blackHoleButtonPressed(_ sender: Any) {
@@ -153,9 +149,15 @@ class GameViewController: UIViewController {
         fieldNode.runAction(action, completionHandler: {
             self.fieldNode.isHidden = true
         })
+        GameHelper.shared.playSound(node: gamerNode, name: "supercharge", rate: 0.1)
 
     }
     
+    @IBAction func pauseButtonPressed(_ sender: Any) {
+        scene.isPaused = !scene.isPaused
+        pauseButton.setTitle(scene.isPaused ? "RESUME" : "PAUSE", for: .normal)
+        pauseButton.setImage(UIImage(named: scene.isPaused ? "icon-play" : "icon-pause"), for: .normal)
+    }
     
     @IBAction func shootButtonPressed(_ sender: Any) {
         needsShootBullet = true
@@ -180,6 +182,7 @@ class GameViewController: UIViewController {
             node.removeAllAnimations()
             node.removeFromParentNode()
         })
+        GameHelper.shared.playSound(node: boxNode, name: "shoot")
     }
     
     func recalutateMove() {
@@ -202,6 +205,8 @@ class GameViewController: UIViewController {
     
     
     func explode(node: SCNNode) {
+        GameHelper.shared.playSound(node: boxNode, name: "explode")
+
         let geometry = node.geometry!
         let position = node.presentation.position
         let rotation = node.presentation.rotation
@@ -214,7 +219,6 @@ class GameViewController: UIViewController {
         let transformMatrix = SCNMatrix4Mult(rotationMatrix, translationMatrix)
         scene.addParticleSystem(explosion, transform: transformMatrix)
         node.removeFromParentNode()
-        targetsCount -= 1
     }
     
     override var shouldAutorotate: Bool {
@@ -242,7 +246,7 @@ extension GameViewController: SCNSceneRendererDelegate {
         guard isPlaying else { return }
         if time > spawnTime {
             spawnTarget()
-            spawnTime = time + 0.1
+            spawnTime = time + 0.5
         }
         if needsShootBullet {
             shoot()

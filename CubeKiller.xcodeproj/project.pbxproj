@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B34A931A1F2AD18A0010CCF4 /* SCNVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A93191F2AD18A0010CCF4 /* SCNVector3.swift */; };
 		B34A931D1F2AE6A60010CCF4 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A931C1F2AE6A60010CCF4 /* Number.swift */; };
+		FA1D320A1F2DB0F100BE84D9 /* GameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1D32091F2DB0F100BE84D9 /* GameHelper.swift */; };
 		FA60CD3E1F2C009700BFA9F9 /* SCNAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA60CD3D1F2C009700BFA9F9 /* SCNAction.swift */; };
 		FA60CD401F2C011400BFA9F9 /* SCNNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA60CD3F1F2C011400BFA9F9 /* SCNNode.swift */; };
 		FABB81651F2A0D5D00BF3167 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB81641F2A0D5D00BF3167 /* AppDelegate.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		B34A93191F2AD18A0010CCF4 /* SCNVector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
 		B34A931C1F2AE6A60010CCF4 /* Number.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
+		FA1D32091F2DB0F100BE84D9 /* GameHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHelper.swift; sourceTree = "<group>"; };
 		FA60CD3D1F2C009700BFA9F9 /* SCNAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNAction.swift; sourceTree = "<group>"; };
 		FA60CD3F1F2C011400BFA9F9 /* SCNNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNNode.swift; sourceTree = "<group>"; };
 		FABB81611F2A0D5D00BF3167 /* CubeKiller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CubeKiller.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +57,7 @@
 				B34A931C1F2AE6A60010CCF4 /* Number.swift */,
 				FA60CD3D1F2C009700BFA9F9 /* SCNAction.swift */,
 				FA60CD3F1F2C011400BFA9F9 /* SCNNode.swift */,
+				FA1D32091F2DB0F100BE84D9 /* GameHelper.swift */,
 			);
 			name = Foundation;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				FA60CD3E1F2C009700BFA9F9 /* SCNAction.swift in Sources */,
 				FABB81651F2A0D5D00BF3167 /* AppDelegate.swift in Sources */,
 				B34A931A1F2AD18A0010CCF4 /* SCNVector3.swift in Sources */,
+				FA1D320A1F2DB0F100BE84D9 /* GameHelper.swift in Sources */,
 				B34A931D1F2AE6A60010CCF4 /* Number.swift in Sources */,
 				FA60CD401F2C011400BFA9F9 /* SCNNode.swift in Sources */,
 			);
