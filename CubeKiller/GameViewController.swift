@@ -141,7 +141,19 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func blackHoleButtonPressed(_ sender: Any) {
-        fieldNode.isHidden = !fieldNode.isHidden
+        guard fieldNode.isHidden else { return }
+        fieldNode.isHidden = false
+        
+        let targetPosition = gamerNode.convertPosition(targetNode.position, to: scnView.scene!.rootNode)
+        let currentPosition = gamerNode.position
+        let by = targetPosition - currentPosition
+        
+        fieldNode.position = currentPosition + by * 6 + SCNVector3(x: 0, y: 3, z: 0)
+        let action = SCNAction.move(by: by * 50, duration: 5)
+        fieldNode.runAction(action, completionHandler: {
+            self.fieldNode.isHidden = true
+        })
+
     }
     
     
@@ -230,7 +242,7 @@ extension GameViewController: SCNSceneRendererDelegate {
         guard isPlaying else { return }
         if time > spawnTime {
             spawnTarget()
-            spawnTime = time + 0.5
+            spawnTime = time + 0.1
         }
         if needsShootBullet {
             shoot()
