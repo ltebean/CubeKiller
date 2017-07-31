@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B34A931A1F2AD18A0010CCF4 /* SCNVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A93191F2AD18A0010CCF4 /* SCNVector3.swift */; };
 		B34A931D1F2AE6A60010CCF4 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A931C1F2AE6A60010CCF4 /* Number.swift */; };
+		BBE875672EDEC91E557906FF /* Pods_CubeKiller.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 244BF499F469E1AC78D83B70 /* Pods_CubeKiller.framework */; };
 		FA1D320A1F2DB0F100BE84D9 /* GameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1D32091F2DB0F100BE84D9 /* GameHelper.swift */; };
 		FA60CD3E1F2C009700BFA9F9 /* SCNAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA60CD3D1F2C009700BFA9F9 /* SCNAction.swift */; };
 		FA60CD401F2C011400BFA9F9 /* SCNNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA60CD3F1F2C011400BFA9F9 /* SCNNode.swift */; };
@@ -22,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F6C60705B5D406C60993D13 /* Pods-CubeKiller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeKiller.release.xcconfig"; path = "Pods/Target Support Files/Pods-CubeKiller/Pods-CubeKiller.release.xcconfig"; sourceTree = "<group>"; };
+		244BF499F469E1AC78D83B70 /* Pods_CubeKiller.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CubeKiller.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		468CDF7DCBB26B5A52186575 /* Pods-CubeKiller.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeKiller.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CubeKiller/Pods-CubeKiller.debug.xcconfig"; sourceTree = "<group>"; };
 		B34A93191F2AD18A0010CCF4 /* SCNVector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
 		B34A931C1F2AE6A60010CCF4 /* Number.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		FA1D32091F2DB0F100BE84D9 /* GameHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHelper.swift; sourceTree = "<group>"; };
@@ -43,12 +47,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBE875672EDEC91E557906FF /* Pods_CubeKiller.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1430E1ED7A32337D90894D2F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				468CDF7DCBB26B5A52186575 /* Pods-CubeKiller.debug.xcconfig */,
+				0F6C60705B5D406C60993D13 /* Pods-CubeKiller.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		44D1498112C26C1E6559683A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				244BF499F469E1AC78D83B70 /* Pods_CubeKiller.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B34A931B1F2AE69B0010CCF4 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +89,8 @@
 			children = (
 				FABB81631F2A0D5D00BF3167 /* CubeKiller */,
 				FABB81621F2A0D5D00BF3167 /* Products */,
+				1430E1ED7A32337D90894D2F /* Pods */,
+				44D1498112C26C1E6559683A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,9 +124,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FABB81751F2A0D5D00BF3167 /* Build configuration list for PBXNativeTarget "CubeKiller" */;
 			buildPhases = (
+				E61D44596B064ECCFCF67C00 /* [CP] Check Pods Manifest.lock */,
 				FABB815D1F2A0D5D00BF3167 /* Sources */,
 				FABB815E1F2A0D5D00BF3167 /* Frameworks */,
 				FABB815F1F2A0D5D00BF3167 /* Resources */,
+				8FA8CC772345169368BDFD64 /* [CP] Embed Pods Frameworks */,
+				3AB92B39FBADBBB6C58EC394 /* [CP] Copy Pods Resources */,
+				B30DC49B1F2ECA5400932200 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -161,6 +189,67 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3AB92B39FBADBBB6C58EC394 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CubeKiller/Pods-CubeKiller-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8FA8CC772345169368BDFD64 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CubeKiller/Pods-CubeKiller-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B30DC49B1F2ECA5400932200 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run f76e439b5fd9873bfe46a5461fc749ec526ee446 5721cf137a323472424a2a4705339158372d733d0538a90a766e395a14814f1d";
+		};
+		E61D44596B064ECCFCF67C00 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FABB815D1F2A0D5D00BF3167 /* Sources */ = {
@@ -293,10 +382,12 @@
 		};
 		FABB81761F2A0D5D00BF3167 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 468CDF7DCBB26B5A52186575 /* Pods-CubeKiller.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LUAG5Z5ST3;
 				INFOPLIST_FILE = CubeKiller/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.ltebean.CubeKiller;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -306,10 +397,12 @@
 		};
 		FABB81771F2A0D5D00BF3167 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F6C60705B5D406C60993D13 /* Pods-CubeKiller.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LUAG5Z5ST3;
 				INFOPLIST_FILE = CubeKiller/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.ltebean.CubeKiller;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -70,7 +70,7 @@ class GameViewController: UIViewController {
         cameraNode = scene.rootNode.childNode(withName: "camera", recursively: true)
         boxNode = scene.rootNode.childNode(withName: "gamerBox", recursively: true)
         boxNode.physicsBody?.categoryBitMask = ColliderCategory.gamer.rawValue
-        boxNode.physicsBody?.contactTestBitMask = ColliderCategory.target.rawValue
+        boxNode.physicsBody?.collisionBitMask = ColliderCategory.target.rawValue
 
         score = 0
         
@@ -171,7 +171,7 @@ class GameViewController: UIViewController {
         bullet.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         bullet.position = currentPosition
         bullet.physicsBody?.categoryBitMask = ColliderCategory.bullet.rawValue
-        bullet.physicsBody?.contactTestBitMask = ColliderCategory.target.rawValue
+        bullet.physicsBody?.collisionBitMask = ColliderCategory.target.rawValue
         bullet.physicsBody?.velocity = by * 8
         bullet.physicsBody?.isAffectedByGravity = false
         bullet.name = "bullet"
@@ -278,9 +278,10 @@ extension GameViewController: SCNPhysicsContactDelegate {
                 self.score += 10
             })
         } else if node.name == "gamerBox" {
-            explode(node: target)
-            self.score += 20
-
+            target.wait(forDuation: 0.5, thenRun: { node in
+                self.explode(node: node)
+                self.score += 20
+            })
         } else {
             node.wait(forDuation: 0.5, thenRun: { node in
                 self.explode(node: node)
