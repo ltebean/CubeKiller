@@ -16,6 +16,8 @@ class GameViewController: UIViewController {
         case gamer  = 0b0001
         case bullet = 0b0010
         case target = 0b0100
+        case floor = 0b1000
+
     }
 
     @IBOutlet weak var scnView: SCNView!
@@ -33,6 +35,7 @@ class GameViewController: UIViewController {
     var spawnTime: TimeInterval = 0
     var gamerNode: SCNNode!
     var targetNode: SCNNode!
+    var floorNode: SCNNode!
 
     var cameraNode: SCNNode!
     var boxNode: SCNNode!
@@ -64,6 +67,7 @@ class GameViewController: UIViewController {
         
         gamerNode = scene.rootNode.childNode(withName: "gamer", recursively: true)
         fieldNode = scene.rootNode.childNode(withName: "field", recursively: true)
+        floorNode = scene.rootNode.childNode(withName: "floor", recursively: true)
 
         targetNode = scene.rootNode.childNode(withName: "targetBox", recursively: true)
         targetNode.isHidden = true
@@ -71,6 +75,10 @@ class GameViewController: UIViewController {
         boxNode = scene.rootNode.childNode(withName: "gamerBox", recursively: true)
         boxNode.physicsBody?.categoryBitMask = ColliderCategory.gamer.rawValue
         boxNode.physicsBody?.collisionBitMask = ColliderCategory.target.rawValue
+
+        floorNode.physicsBody?.categoryBitMask = ColliderCategory.floor.rawValue
+        floorNode.physicsBody?.collisionBitMask = ColliderCategory.target.rawValue | ColliderCategory.gamer.rawValue
+
 
         score = 0
         
@@ -126,7 +134,7 @@ class GameViewController: UIViewController {
         target.name = "target"
         target.physicsBody?.categoryBitMask = ColliderCategory.target.rawValue
         target.physicsBody?.contactTestBitMask = ColliderCategory.gamer.rawValue | ColliderCategory.bullet.rawValue | ColliderCategory.target.rawValue
-        target.physicsBody?.collisionBitMask = ColliderCategory.gamer.rawValue | ColliderCategory.bullet.rawValue | ColliderCategory.target.rawValue
+        target.physicsBody?.collisionBitMask = ColliderCategory.gamer.rawValue | ColliderCategory.bullet.rawValue | ColliderCategory.target.rawValue | ColliderCategory.floor.rawValue
         scene.rootNode.addChildNode(target)
         
         target.geometry?.materials[0].diffuse.contents = UIColor.random()
